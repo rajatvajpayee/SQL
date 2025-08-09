@@ -308,8 +308,22 @@ Databases employ various strategies to handle deadlocks:
 	- Higher isolation levels provide ***greater consistency but can reduce concurrency.*** 
 	- Lower isolation levels ***increase concurrency but may lead to various concurrency anomalies.***
 
+Terms : 
+- **Dirty Read:** Reading uncommitted data.
+- **Non-Repeatable Read:** Reading the same row twice within a transaction, and the row's value is changed by another transaction in between.
+- **Phantom Read:** A transaction reads a set of rows based on a condition. Another transaction inserts or deletes rows that match the condition, causing the first transaction to see a different set of rows if it repeats the read.
+
 Common Isolation Levels :
 1. **Read Uncommitted:** The lowest level. Transactions can read uncommitted changes made by other transactions (dirty reads). This level offers the highest concurrency but is most prone to inconsistencies.
 2. **Read Committed:** Transactions can only read committed changes made by other transactions. Dirty reads are prevented, but non-repeatable reads and phantom reads can still occur.
 3. **Repeatable Read:** Transactions are guaranteed to see the same data throughout their execution. Non-repeatable reads are prevented, but phantom reads can still occur.
 4. **Serializable:** The highest level. Transactions appear to execute as if they were running one at a time (serially). This level provides the highest consistency but can significantly reduce concurrency.
+
+|Isolation Level|Dirty Reads|Non-repeatable Reads|Phantom Reads|Concurrency|Consistency|
+|---|---|---|---|---|---|
+|Read Uncommitted|✅ Yes|✅ Yes|✅ Yes|High|Low|
+|Read Committed|❌ No|✅ Yes|✅ Yes|Medium|Medium|
+|Repeatable Read|❌ No|❌ No|✅ Yes|Low-Medium|High|
+|Serializable|❌ No|❌ No|❌ No|Low|Highest|
+
+**How to choose isolation level?** The appropriate isolation level depends on the application's requirements. Applications that require high consistency should use higher isolation levels, while applications that prioritize concurrency can use lower isolation levels. Most database systems allow you to configure the isolation level at the session or transaction level.
