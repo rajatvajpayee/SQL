@@ -327,3 +327,5 @@ Common Isolation Levels :
 |Serializable|❌ No|❌ No|❌ No|Low|Highest|
 
 **How to choose isolation level?** The appropriate isolation level depends on the application's requirements. Applications that require high consistency should use higher isolation levels, while applications that prioritize concurrency can use lower isolation levels. Most database systems allow you to configure the isolation level at the session or transaction level.
+
+

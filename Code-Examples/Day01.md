@@ -48,7 +48,7 @@ SELECT * FROM employee;
 ```
 1. Only one column can be updated at one time. No multiple columns @ 1 time
 
-#### Update
+## Update
 ```
 UPDATE employee 
 SET Department = 'HR', Employee_Name = 'John Doe'
